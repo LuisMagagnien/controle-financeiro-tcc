@@ -5,14 +5,7 @@ import Login from './pages/Login'
 import Cadastro from './pages/Cadastro'
 import Transacoes from './pages/Transacoes'
 import Metas from './pages/Metas'
-
-function Placeholder({ nome }) {
-  return (
-    <div style={{ padding: '40px', color: '#888', fontSize: '18px' }}>
-      Página <strong>{nome}</strong> — em construção
-    </div>
-  )
-}
+import Carteiras from './pages/Carteiras'
 
 export default function App() {
   return (
@@ -24,7 +17,7 @@ export default function App() {
           <Route index element={<Dashboard />} />
           <Route path="transacoes" element={<Transacoes />} />
           <Route path="metas"      element={<Metas />} />
-          <Route path="carteiras"  element={<Placeholder nome="Carteiras" />} />
+          <Route path="carteiras"  element={<Carteiras />} />
         </Route>
       </Routes>
     </BrowserRouter>
