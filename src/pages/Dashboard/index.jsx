@@ -122,7 +122,7 @@ export default function Dashboard() {
           <div key={i} className="table-row">
             <span className="t-desc">{t.desc}</span>
             <span className="t-cat">{t.categoria}</span>
-            <span className="t-data">{t.data}</span>
+            <span className="t-data">{t.data.split('-').reverse().join('/')}</span>
             <span className={`t-valor ${t.tipo}`}>
               {t.tipo === 'receita' ? '+' : '-'}
               {t.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}

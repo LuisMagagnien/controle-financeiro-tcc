@@ -110,7 +110,7 @@ export default function Login() {
 
             <p className="signup-text">
               Não tem uma conta?{' '}
-              <a href="#">Cadastre-se gratuitamente</a>
+              <a href="#" onClick={() => navigate('/cadastro')}>Cadastre-se gratuitamente</a>
             </p>
           </form>
         </div>
