@@ -1,0 +1,102 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 4px solid transparent;
+}
+
+.card-blue   { border-top-color: #3b82f6; }
+.card-green  { border-top-color: #22c55e; }
+.card-red    { border-top-color: #ef4444; }
+.card-purple { border-top-color: #a855f7; }
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #888;
+}
+
+.card-title { font-size: 13px; }
+
+.card-icon {
+  padding: 6px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  display: flex;
+}
+
+.card-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.card-trend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.card-trend.up   { color: #22c55e; }
+.card-trend.down { color: #ef4444; }
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.transacoes-table {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr;
+  padding: 12px 20px;
+  background: #f9fafb;
+  font-size: 12px;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr;
+  padding: 14px 20px;
+  border-top: 1px solid #f0f2f5;
+  font-size: 14px;
+  align-items: center;
+  transition: background 0.15s;
+}
+
+.table-row:hover { background: #f9fafb; }
+
+.t-desc  { font-weight: 500; color: #1a1a2e; }
+.t-cat   { color: #888; }
+.t-data  { color: #aaa; }
+
+.t-valor          { font-weight: 600; }
+.t-valor.receita  { color: #22c55e; }
+.t-valor.despesa  { color: #ef4444; }
