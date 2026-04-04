@@ -1,24 +1,65 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
+import { api } from '../services/api'
 
 const FinanceContext = createContext()
 
-const transacoesIniciais = [
-  { id: 1, desc: 'Salário',      tipo: 'receita', categoria: 'Salário',     valor: 5000, data: '2024-07-01' },
-  { id: 2, desc: 'Aluguel',      tipo: 'despesa', categoria: 'Moradia',     valor: 1200, data: '2024-07-05' },
-  { id: 3, desc: 'Supermercado', tipo: 'despesa', categoria: 'Alimentação', valor: 380,  data: '2024-07-08' },
-  { id: 4, desc: 'Freelance',    tipo: 'receita', categoria: 'Freelance',   valor: 1800, data: '2024-07-10' },
-  { id: 5, desc: 'Conta de luz', tipo: 'despesa', categoria: 'Moradia',     valor: 210,  data: '2024-07-12' },
-]
-
 export function FinanceProvider({ children }) {
-  const [transacoes, setTransacoes] = useState(transacoesIniciais)
+  const [transacoes, setTransacoes] = useState([])
+  const [metas, setMetas]           = useState([])
+  const [carteiras, setCarteiras]   = useState([])
+  const [loading, setLoading]       = useState(true)
 
-  function adicionarTransacao(transacao) {
-    setTransacoes(prev => [{ ...transacao, id: Date.now() }, ...prev])
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      setLoading(false)
+      return
+    }
+    Promise.all([
+      api.get('/transacoes'),
+      api.get('/metas'),
+      api.get('/carteiras'),
+    ]).then(([t, m, c]) => {
+      setTransacoes(t)
+      setMetas(m)
+      setCarteiras(c)
+    }).catch(console.error)
+      .finally(() => setLoading(false))
+  }, [])
+
+  async function adicionarTransacao(transacao) {
+    const nova = await api.post('/transacoes', transacao)
+    setTransacoes(prev => [nova, ...prev])
   }
 
-  function removerTransacao(id) {
+  async function removerTransacao(id) {
+    await api.delete(`/transacoes/${id}`)
     setTransacoes(prev => prev.filter(t => t.id !== id))
+  }
+
+  async function adicionarMeta(meta) {
+    const nova = await api.post('/metas', meta)
+    setMetas(prev => [...prev, nova])
+  }
+
+  async function atualizarMeta(id, atual) {
+    await api.put(`/metas/${id}`, { atual })
+    setMetas(prev => prev.map(m => m.id === id ? { ...m, atual } : m))
+  }
+
+  async function removerMeta(id) {
+    await api.delete(`/metas/${id}`)
+    setMetas(prev => prev.filter(m => m.id !== id))
+  }
+
+  async function adicionarCarteira(carteira) {
+    const nova = await api.post('/carteiras', carteira)
+    setCarteiras(prev => [...prev, nova])
+  }
+
+  async function removerCarteira(id) {
+    await api.delete(`/carteiras/${id}`)
+    setCarteiras(prev => prev.filter(c => c.id !== id))
   }
 
   const totalReceitas = transacoes
@@ -42,12 +83,11 @@ export function FinanceProvider({ children }) {
 
   return (
     <FinanceContext.Provider value={{
-      transacoes,
-      adicionarTransacao,
-      removerTransacao,
-      totalReceitas,
-      totalDespesas,
-      saldo,
+      transacoes, metas, carteiras, loading,
+      adicionarTransacao, removerTransacao,
+      adicionarMeta, atualizarMeta, removerMeta,
+      adicionarCarteira, removerCarteira,
+      totalReceitas, totalDespesas, saldo,
       gastosPorCategoria,
     }}>
       {children}

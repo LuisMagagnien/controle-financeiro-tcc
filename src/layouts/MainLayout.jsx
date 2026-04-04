@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import {
   LayoutDashboard,
   ArrowDownUp,
@@ -16,6 +16,19 @@ const navItems = [
 ]
 
 export default function MainLayout() {
+  const navigate = useNavigate()
+
+  function handleLogout() {
+    localStorage.removeItem('token')
+    localStorage.removeItem('usuario')
+    navigate('/login')
+  }
+
+  const usuario = JSON.parse(localStorage.getItem('usuario') || '{}')
+  const iniciais = usuario.nome
+    ? usuario.nome.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase()
+    : 'U'
+
   return (
     <div className="layout">
       <aside className="sidebar">
@@ -40,7 +53,7 @@ export default function MainLayout() {
           ))}
         </nav>
 
-        <button className="sidebar-logout">
+        <button className="sidebar-logout" onClick={handleLogout}>
           <LogOut size={20} />
           <span>Sair</span>
         </button>
@@ -50,8 +63,8 @@ export default function MainLayout() {
         <header className="topbar">
           <h1 className="page-title">Dashboard</h1>
           <div className="topbar-user">
-            <div className="avatar">JS</div>
-            <span>João Silva</span>
+            <div className="avatar">{iniciais}</div>
+            <span>{usuario.nome || 'Usuário'}</span>
           </div>
         </header>
 

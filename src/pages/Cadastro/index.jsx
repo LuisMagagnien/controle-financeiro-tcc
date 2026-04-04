@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Wallet, Eye, EyeOff } from 'lucide-react'
+import { api } from '../../services/api'
 import './Cadastro.css'
 
 export default function Cadastro() {
   const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({
     nome: '', email: '', password: '', confirm: ''
   })
@@ -30,14 +32,28 @@ export default function Cadastro() {
     return novosErros
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     const novosErros = validar()
     if (Object.keys(novosErros).length > 0) {
       setErros(novosErros)
       return
     }
-    navigate('/')
+    try {
+      setLoading(true)
+      const data = await api.post('/auth/cadastrar', {
+        nome: form.nome,
+        email: form.email,
+        senha: form.password,
+      })
+      localStorage.setItem('token', data.token)
+      localStorage.setItem('usuario', JSON.stringify(data.usuario))
+      navigate('/')
+    } catch (err) {
+      setErros({ email: err.message })
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -165,8 +181,8 @@ export default function Cadastro() {
               </label>
             </div>
 
-            <button type="submit" className="btn-cadastrar">
-              Criar minha conta
+            <button type="submit" className="btn-cadastrar" disabled={loading}>
+              {loading ? 'Criando conta...' : 'Criar minha conta'}
             </button>
 
             <p className="login-text">

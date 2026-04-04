@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Wallet, Eye, EyeOff } from 'lucide-react'
+import { api } from '../../services/api'
 import './Login.css'
 
 export default function Login() {
@@ -8,19 +9,33 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false)
   const [form, setForm] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value })
     setError('')
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     if (!form.email || !form.password) {
       setError('Preencha todos os campos.')
       return
     }
-    navigate('/')
+    try {
+      setLoading(true)
+      const data = await api.post('/auth/login', {
+        email: form.email,
+        senha: form.password,
+      })
+      localStorage.setItem('token', data.token)
+      localStorage.setItem('usuario', JSON.stringify(data.usuario))
+      navigate('/')
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -104,13 +119,15 @@ export default function Login() {
               <a href="#" className="forgot-link">Esqueci minha senha</a>
             </div>
 
-            <button type="submit" className="btn-login">
-              Entrar
+            <button type="submit" className="btn-login" disabled={loading}>
+              {loading ? 'Entrando...' : 'Entrar'}
             </button>
 
             <p className="signup-text">
               Não tem uma conta?{' '}
-              <a href="#" onClick={() => navigate('/cadastro')}>Cadastre-se gratuitamente</a>
+              <a href="#" onClick={() => navigate('/cadastro')}>
+                Cadastre-se gratuitamente
+              </a>
             </p>
           </form>
         </div>

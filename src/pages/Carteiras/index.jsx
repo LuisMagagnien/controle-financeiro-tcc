@@ -1,16 +1,10 @@
 import { useState } from 'react'
 import { Plus, Trash2, X, Wallet, CreditCard, Banknote, TrendingUp } from 'lucide-react'
+import { useFinance } from '../../context/FinanceContext'
 import './Carteiras.css'
 
-const carteirasIniciais = [
-  { id: 1, nome: 'Conta Corrente',  tipo: 'banco',   saldo: 3200,  cor: '#60a5fa', icone: 'banco'  },
-  { id: 2, nome: 'Cartão de Crédito', tipo: 'cartao', saldo: -850, cor: '#f87171', icone: 'cartao' },
-  { id: 3, nome: 'Dinheiro',         tipo: 'dinheiro', saldo: 420, cor: '#4ade80', icone: 'dinheiro'},
-  { id: 4, nome: 'Investimentos',    tipo: 'invest',   saldo: 8500, cor: '#c084fc', icone: 'invest' },
-]
-
-const vazio = { nome: '', tipo: 'banco', saldo: '', cor: '#60a5fa' }
 const cores  = ['#60a5fa','#4ade80','#c084fc','#fb923c','#f472b6','#f87171','#34d399','#facc15']
+const vazio  = { nome: '', tipo: 'banco', saldo: '', cor: '#60a5fa' }
 
 function Icone({ tipo, size = 22 }) {
   if (tipo === 'cartao')   return <CreditCard size={size} />
@@ -20,40 +14,42 @@ function Icone({ tipo, size = 22 }) {
 }
 
 export default function Carteiras() {
-  const [carteiras, setCarteiras]     = useState(carteirasIniciais)
+  const { carteiras, adicionarCarteira, removerCarteira } = useFinance()
   const [modalAberto, setModalAberto] = useState(false)
   const [form, setForm]               = useState(vazio)
   const [erro, setErro]               = useState('')
+  const [salvando, setSalvando]       = useState(false)
 
-  const totalSaldo     = carteiras.reduce((acc, c) => acc + c.saldo, 0)
-  const totalPositivo  = carteiras.filter(c => c.saldo > 0).reduce((acc, c) => acc + c.saldo, 0)
-  const totalNegativo  = carteiras.filter(c => c.saldo < 0).reduce((acc, c) => acc + c.saldo, 0)
+  const totalSaldo    = carteiras.reduce((acc, c) => acc + c.saldo, 0)
+  const totalPositivo = carteiras.filter(c => c.saldo > 0).reduce((acc, c) => acc + c.saldo, 0)
+  const totalNegativo = carteiras.filter(c => c.saldo < 0).reduce((acc, c) => acc + c.saldo, 0)
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value })
     setErro('')
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     if (!form.nome || form.saldo === '') {
       setErro('Preencha nome e saldo inicial.')
       return
     }
-    setCarteiras([...carteiras, {
-      id: Date.now(),
-      nome: form.nome,
-      tipo: form.tipo,
-      saldo: parseFloat(form.saldo),
-      cor: form.cor,
-      icone: form.tipo,
-    }])
-    setForm(vazio)
-    setModalAberto(false)
-  }
-
-  function remover(id) {
-    setCarteiras(carteiras.filter(c => c.id !== id))
+    try {
+      setSalvando(true)
+      await adicionarCarteira({
+        nome: form.nome,
+        tipo: form.tipo,
+        saldo: parseFloat(form.saldo),
+        cor: form.cor,
+      })
+      setForm(vazio)
+      setModalAberto(false)
+    } catch (err) {
+      setErro(err.message)
+    } finally {
+      setSalvando(false)
+    }
   }
 
   function formatarValor(v) {
@@ -62,8 +58,6 @@ export default function Carteiras() {
 
   return (
     <div className="carteiras-page">
-
-      {/* Resumo */}
       <div className="carteiras-resumo">
         <div className="resumo-total">
           <span>Patrimônio líquido</span>
@@ -92,7 +86,6 @@ export default function Carteiras() {
         </button>
       </div>
 
-      {/* Grid */}
       {carteiras.length === 0 ? (
         <div className="carteiras-vazio">
           <Wallet size={48} />
@@ -111,21 +104,21 @@ export default function Carteiras() {
                   <h3>{c.nome}</h3>
                   <span className="carteira-tipo">{c.tipo}</span>
                 </div>
-                <button className="btn-remover" onClick={() => remover(c.id)}>
+                <button className="btn-remover" onClick={() => removerCarteira(c.id)}>
                   <Trash2 size={15} />
                 </button>
               </div>
-
               <div className="carteira-saldo-label">Saldo atual</div>
               <div className={`carteira-saldo ${c.saldo >= 0 ? 'positivo' : 'negativo'}`}>
                 {formatarValor(c.saldo)}
               </div>
-
               <div className="carteira-barra-bg">
                 <div
                   className="carteira-barra"
                   style={{
-                    width: totalPositivo > 0 ? `${Math.min((Math.abs(c.saldo) / totalPositivo) * 100, 100)}%` : '0%',
+                    width: totalPositivo > 0
+                      ? `${Math.min((Math.abs(c.saldo) / totalPositivo) * 100, 100)}%`
+                      : '0%',
                     background: c.cor
                   }}
                 />
@@ -133,15 +126,13 @@ export default function Carteiras() {
               <div className="carteira-pct" style={{ color: c.cor }}>
                 {totalPositivo > 0
                   ? `${Math.round((Math.abs(c.saldo) / totalPositivo) * 100)}% do total`
-                  : '—'
-                }
+                  : '—'}
               </div>
             </div>
           ))}
         </div>
       )}
 
-      {/* Modal */}
       {modalAberto && (
         <div className="modal-overlay" onClick={() => setModalAberto(false)}>
           <div className="modal" onClick={e => e.stopPropagation()}>
@@ -156,7 +147,6 @@ export default function Carteiras() {
                 <label>Nome da carteira</label>
                 <input name="nome" placeholder="Ex: Nubank" value={form.nome} onChange={handleChange} />
               </div>
-
               <div className="form-group">
                 <label>Tipo</label>
                 <div className="tipo-grid">
@@ -166,8 +156,7 @@ export default function Carteiras() {
                     { value: 'dinheiro', label: 'Dinheiro',     icon: <Banknote size={18} /> },
                     { value: 'invest',   label: 'Investimento', icon: <TrendingUp size={18} /> },
                   ].map(t => (
-                    <button
-                      key={t.value} type="button"
+                    <button key={t.value} type="button"
                       className={`tipo-btn ${form.tipo === t.value ? 'ativo' : ''}`}
                       onClick={() => setForm({ ...form, tipo: t.value })}
                     >
@@ -177,21 +166,15 @@ export default function Carteiras() {
                   ))}
                 </div>
               </div>
-
               <div className="form-group">
                 <label>Saldo inicial (R$)</label>
-                <input
-                  name="saldo" type="number" step="0.01"
-                  placeholder="0,00" value={form.saldo} onChange={handleChange}
-                />
+                <input name="saldo" type="number" step="0.01" placeholder="0,00" value={form.saldo} onChange={handleChange} />
               </div>
-
               <div className="form-group">
                 <label>Cor</label>
                 <div className="cores-grid">
                   {cores.map(cor => (
-                    <button
-                      key={cor} type="button"
+                    <button key={cor} type="button"
                       className={`cor-btn ${form.cor === cor ? 'ativo' : ''}`}
                       style={{ background: cor }}
                       onClick={() => setForm({ ...form, cor })}
@@ -199,9 +182,10 @@ export default function Carteiras() {
                   ))}
                 </div>
               </div>
-
               {erro && <div className="form-erro">{erro}</div>}
-              <button type="submit" className="btn-salvar">Adicionar carteira</button>
+              <button type="submit" className="btn-salvar" disabled={salvando}>
+                {salvando ? 'Salvando...' : 'Adicionar carteira'}
+              </button>
             </form>
           </div>
         </div>

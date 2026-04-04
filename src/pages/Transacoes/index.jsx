@@ -13,10 +13,11 @@ const vazio = { desc: '', tipo: 'despesa', categoria: 'Alimentação', valor: ''
 export default function Transacoes() {
   const { transacoes, adicionarTransacao, removerTransacao,
           totalReceitas, totalDespesas, saldo } = useFinance()
-  const [filtro, setFiltro] = useState('todas')
+  const [filtro, setFiltro]         = useState('todas')
   const [modalAberto, setModalAberto] = useState(false)
-  const [form, setForm] = useState(vazio)
-  const [erro, setErro] = useState('')
+  const [form, setForm]             = useState(vazio)
+  const [erro, setErro]             = useState('')
+  const [salvando, setSalvando]     = useState(false)
 
   const transacoesFiltradas = transacoes.filter(t =>
     filtro === 'todas' ? true : t.tipo === filtro
@@ -27,21 +28,28 @@ export default function Transacoes() {
     setErro('')
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     if (!form.desc || !form.valor || !form.data) {
       setErro('Preencha todos os campos.')
       return
     }
-    adicionarTransacao({
-      desc: form.desc,
-      tipo: form.tipo,
-      categoria: form.categoria,
-      valor: parseFloat(form.valor),
-      data: form.data,
-    })
-    setForm(vazio)
-    setModalAberto(false)
+    try {
+      setSalvando(true)
+      await adicionarTransacao({
+        desc: form.desc,
+        tipo: form.tipo,
+        categoria: form.categoria,
+        valor: parseFloat(form.valor),
+        data: form.data,
+      })
+      setForm(vazio)
+      setModalAberto(false)
+    } catch (err) {
+      setErro(err.message)
+    } finally {
+      setSalvando(false)
+    }
   }
 
   function formatarValor(valor) {
@@ -49,8 +57,7 @@ export default function Transacoes() {
   }
 
   function formatarData(data) {
-    const [ano, mes, dia] = data.split('-')
-    return `${dia}/${mes}/${ano}`
+    return data.split('-').reverse().join('/')
   }
 
   return (
@@ -173,7 +180,9 @@ export default function Transacoes() {
                 </select>
               </div>
               {erro && <div className="form-erro">{erro}</div>}
-              <button type="submit" className="btn-salvar">Salvar transação</button>
+              <button type="submit" className="btn-salvar" disabled={salvando}>
+                {salvando ? 'Salvando...' : 'Salvar transação'}
+              </button>
             </form>
           </div>
         </div>
