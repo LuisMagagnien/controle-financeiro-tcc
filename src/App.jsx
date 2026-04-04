@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
 import Dashboard from './pages/Dashboard'
 import Login from './pages/Login'
+import Transacoes from './pages/Transacoes'
 
 function Placeholder({ nome }) {
   return (
@@ -18,7 +19,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Dashboard />} />
-          <Route path="transacoes" element={<Placeholder nome="Transações" />} />
+          <Route path="transacoes" element={<Transacoes />} />
           <Route path="metas"      element={<Placeholder nome="Metas" />} />
           <Route path="carteiras"  element={<Placeholder nome="Carteiras" />} />
         </Route>
