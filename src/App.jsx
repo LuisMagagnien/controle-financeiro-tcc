@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard'
 import Login from './pages/Login'
 import Cadastro from './pages/Cadastro'
 import Transacoes from './pages/Transacoes'
+import Metas from './pages/Metas'
 
 function Placeholder({ nome }) {
   return (
@@ -22,7 +23,7 @@ export default function App() {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="transacoes" element={<Transacoes />} />
-          <Route path="metas"      element={<Placeholder nome="Metas" />} />
+          <Route path="metas"      element={<Metas />} />
           <Route path="carteiras"  element={<Placeholder nome="Carteiras" />} />
         </Route>
       </Routes>
