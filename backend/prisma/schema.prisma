@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Usuario {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String   @unique
+  senha     String
+  criadoEm DateTime @default(now())
+
+  transacoes Transacao[]
+  metas      Meta[]
+  carteiras  Carteira[]
+}
+
+model Transacao {
+  id        Int      @id @default(autoincrement())
+  desc      String
+  tipo      String
+  categoria String
+  valor     Float
+  data      String
+  criadoEm DateTime @default(now())
+
+  usuarioId Int
+  usuario   Usuario @relation(fields: [usuarioId], references: [id])
+}
+
+model Meta {
+  id       Int    @id @default(autoincrement())
+  nome     String
+  objetivo Float
+  atual    Float  @default(0)
+  icone    String @default("🎯")
+  cor      String @default("#4ade80")
+
+  usuarioId Int
+  usuario   Usuario @relation(fields: [usuarioId], references: [id])
+}
+
+model Carteira {
+  id    Int    @id @default(autoincrement())
+  nome  String
+  tipo  String
+  saldo Float  @default(0)
+  cor   String @default("#60a5fa")
+
+  usuarioId Int
+  usuario   Usuario @relation(fields: [usuarioId], references: [id])
+}
