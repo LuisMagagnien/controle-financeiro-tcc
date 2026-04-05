@@ -1,0 +1,140 @@
+.recuperar-page {
+  min-height: 100vh;
+  background-color: #f0f2f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.recuperar-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 4px 24px #0000000d;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.recuperar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #4ade80;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.recuperar-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+}
+
+.recuperar-header p {
+  font-size: 14px;
+  color: #888;
+  line-height: 1.6;
+}
+
+.recuperar-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.form-group input {
+  padding: 11px 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #1a1a2e;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus { border-color: #4ade80; }
+
+.recuperar-erro {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #ef4444;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.btn-recuperar {
+  background: #4ade80;
+  color: #1a1a2e;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 13px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-recuperar:hover { background: #22c55e; }
+.btn-recuperar:disabled { opacity: 0.7; cursor: not-allowed; }
+
+.recuperar-sucesso {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.sucesso-icone {
+  font-size: 48px;
+}
+
+.recuperar-sucesso h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.recuperar-sucesso p {
+  font-size: 14px;
+  color: #888;
+  line-height: 1.6;
+}
+
+.sucesso-obs {
+  font-size: 12px !important;
+  color: #bbb !important;
+}
+
+.btn-voltar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 13px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.btn-voltar:hover { color: #1a1a2e; }

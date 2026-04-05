@@ -6,10 +6,11 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.use('/auth',       require('./routes/auth'))
-app.use('/transacoes', require('./routes/transacoes'))
-app.use('/metas',      require('./routes/metas'))
-app.use('/carteiras',  require('./routes/carteiras'))
+app.use('/auth',        require('./routes/auth'))
+app.use('/transacoes',  require('./routes/transacoes'))
+app.use('/metas',       require('./routes/metas'))
+app.use('/carteiras',   require('./routes/carteiras'))
+app.use('/recuperacao', require('./routes/recuperacao'))
 
 app.get('/', (req, res) => res.json({ status: 'API rodando!' }))
 

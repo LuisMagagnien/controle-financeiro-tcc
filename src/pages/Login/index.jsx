@@ -116,7 +116,7 @@ export default function Login() {
                 <input type="checkbox" />
                 <span>Lembrar de mim</span>
               </label>
-              <a href="#" className="forgot-link">Esqueci minha senha</a>
+              <a href="#" className="forgot-link" onClick={() => navigate('/recuperar-senha')}>Esqueci minha senha</a>
             </div>
 
             <button type="submit" className="btn-login" disabled={loading}>

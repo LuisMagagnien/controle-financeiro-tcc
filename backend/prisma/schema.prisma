@@ -4,6 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Usuario {
@@ -13,9 +14,10 @@ model Usuario {
   senha     String
   criadoEm DateTime @default(now())
 
-  transacoes Transacao[]
-  metas      Meta[]
-  carteiras  Carteira[]
+  transacoes       Transacao[]
+  metas            Meta[]
+  carteiras        Carteira[]
+  tokensRecuperacao TokenRecuperacao[]
 }
 
 model Transacao {
@@ -52,4 +54,13 @@ model Carteira {
 
   usuarioId Int
   usuario   Usuario @relation(fields: [usuarioId], references: [id])
+}
+
+model TokenRecuperacao {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  usuarioId Int
+  usuario   Usuario  @relation(fields: [usuarioId], references: [id])
+  expiracao DateTime
+  usado     Boolean  @default(false)
 }
