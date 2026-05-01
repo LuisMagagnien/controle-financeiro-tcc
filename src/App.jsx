@@ -6,6 +6,7 @@ import Cadastro from './pages/Cadastro'
 import Transacoes from './pages/Transacoes'
 import Metas from './pages/Metas'
 import Carteiras from './pages/Carteiras'
+import Importar from './pages/Importar'
 import RecuperarSenha from './pages/RecuperarSenha'
 import RedefinirSenha from './pages/RedefinirSenha'
 import RotaProtegida from './components/RotaProtegida'
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="transacoes" element={<Transacoes />} />
           <Route path="metas"      element={<Metas />} />
           <Route path="carteiras"  element={<Carteiras />} />
+          <Route path="importar"   element={<Importar />} />
         </Route>
       </Routes>
     </BrowserRouter>
