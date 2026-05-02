@@ -7,14 +7,12 @@ export function FinanceProvider({ children }) {
   const [transacoes, setTransacoes] = useState([])
   const [metas, setMetas]           = useState([])
   const [carteiras, setCarteiras]   = useState([])
+  const [orcamentos, setOrcamentos] = useState([])
   const [loading, setLoading]       = useState(true)
 
   useEffect(() => {
     const token = localStorage.getItem('token')
-    if (!token) {
-      setLoading(false)
-      return
-    }
+    if (!token) { setLoading(false); return }
     Promise.all([
       api.get('/transacoes'),
       api.get('/metas'),
@@ -62,6 +60,14 @@ export function FinanceProvider({ children }) {
     setCarteiras(prev => prev.filter(c => c.id !== id))
   }
 
+  function adicionarOrcamento(orc) {
+    setOrcamentos(prev => [...prev, orc])
+  }
+
+  function removerOrcamento(index) {
+    setOrcamentos(prev => prev.filter((_, i) => i !== index))
+  }
+
   const totalReceitas = transacoes
     .filter(t => t.tipo === 'receita')
     .reduce((acc, t) => acc + t.valor, 0)
@@ -83,10 +89,11 @@ export function FinanceProvider({ children }) {
 
   return (
     <FinanceContext.Provider value={{
-      transacoes, metas, carteiras, loading,
+      transacoes, metas, carteiras, orcamentos, loading,
       adicionarTransacao, removerTransacao,
       adicionarMeta, atualizarMeta, removerMeta,
       adicionarCarteira, removerCarteira,
+      adicionarOrcamento, removerOrcamento,
       totalReceitas, totalDespesas, saldo,
       gastosPorCategoria,
     }}>

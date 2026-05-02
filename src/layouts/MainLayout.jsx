@@ -6,19 +6,22 @@ import {
   Wallet,
   Upload,
   FileText,
+  PieChart,
   LogOut
 } from 'lucide-react'
+import Notificacoes from '../components/Notificacoes'
 import './MainLayout.css'
-
 
 const navItems = [
   { to: '/',           icon: <LayoutDashboard size={20} />, label: 'Dashboard' },
   { to: '/transacoes', icon: <ArrowDownUp size={20} />,     label: 'Transações' },
   { to: '/metas',      icon: <Target size={20} />,          label: 'Metas' },
   { to: '/carteiras',  icon: <Wallet size={20} />,          label: 'Carteiras' },
+  { to: '/orcamento',  icon: <PieChart size={20} />,        label: 'Orçamento' },
   { to: '/importar',   icon: <Upload size={20} />,          label: 'Importar' },
   { to: '/relatorio',  icon: <FileText size={20} />,        label: 'Relatório' },
 ]
+
 export default function MainLayout() {
   const navigate = useNavigate()
 
@@ -66,9 +69,12 @@ export default function MainLayout() {
       <div className="main">
         <header className="topbar">
           <h1 className="page-title">Dashboard</h1>
-          <div className="topbar-user">
-            <div className="avatar">{iniciais}</div>
-            <span>{usuario.nome || 'Usuário'}</span>
+          <div className="topbar-acoes">
+            <Notificacoes />
+            <div className="topbar-user">
+              <div className="avatar">{iniciais}</div>
+              <span>{usuario.nome || 'Usuário'}</span>
+            </div>
           </div>
         </header>
 
