@@ -5,9 +5,11 @@ import {
   Target,
   Wallet,
   Upload,
+  FileText,
   LogOut
 } from 'lucide-react'
 import './MainLayout.css'
+
 
 const navItems = [
   { to: '/',           icon: <LayoutDashboard size={20} />, label: 'Dashboard' },
@@ -15,6 +17,7 @@ const navItems = [
   { to: '/metas',      icon: <Target size={20} />,          label: 'Metas' },
   { to: '/carteiras',  icon: <Wallet size={20} />,          label: 'Carteiras' },
   { to: '/importar',   icon: <Upload size={20} />,          label: 'Importar' },
+  { to: '/relatorio',  icon: <FileText size={20} />,        label: 'Relatório' },
 ]
 export default function MainLayout() {
   const navigate = useNavigate()

@@ -10,6 +10,7 @@ import Importar from './pages/Importar'
 import RecuperarSenha from './pages/RecuperarSenha'
 import RedefinirSenha from './pages/RedefinirSenha'
 import RotaProtegida from './components/RotaProtegida'
+import Relatorio from './pages/Relatorio'
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/cadastro"        element={<Cadastro />} />
         <Route path="/recuperar-senha" element={<RecuperarSenha />} />
         <Route path="/redefinir-senha" element={<RedefinirSenha />} />
+        <Route path="relatorio" element={<Relatorio />} />
         <Route path="/" element={
           <RotaProtegida>
             <MainLayout />
