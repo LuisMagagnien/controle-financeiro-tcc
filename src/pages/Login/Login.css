@@ -3,7 +3,6 @@
   min-height: 100vh;
 }
 
-/* ── Lado esquerdo ── */
 .login-left {
   flex: 1;
   background-color: #1a1a2e;
@@ -37,12 +36,7 @@
   line-height: 1.6;
 }
 
-.login-features {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-top: 8px;
-}
+.login-features { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
 
 .feature-item {
   display: flex;
@@ -52,22 +46,15 @@
   font-size: 15px;
 }
 
-.feature-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
+.feature-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 .feature-dot.green  { background-color: #4ade80; }
 .feature-dot.blue   { background-color: #60a5fa; }
 .feature-dot.purple { background-color: #c084fc; }
 .feature-dot.orange { background-color: #fb923c; }
 
-/* ── Lado direito ── */
 .login-right {
   flex: 1;
-  background-color: #f0f2f5;
+  background-color: var(--bg-page);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,71 +62,39 @@
 }
 
 .login-card {
-  background: #fff;
+  background: var(--bg-card);
   border-radius: 16px;
   padding: 40px;
   width: 100%;
   max-width: 420px;
-  box-shadow: 0 4px 24px #0000000d;
+  box-shadow: var(--shadow);
 }
 
-.login-card-header {
-  margin-bottom: 28px;
-}
+.login-card-header { margin-bottom: 28px; }
+.login-card-header h2 { font-size: 22px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+.login-card-header p { font-size: 14px; color: var(--text-secondary); }
 
-.login-card-header h2 {
-  font-size: 22px;
-  font-weight: 700;
-  color: #1a1a2e;
-  margin-bottom: 6px;
-}
+.login-form { display: flex; flex-direction: column; gap: 18px; }
 
-.login-card-header p {
-  font-size: 14px;
-  color: #888;
-}
-
-/* ── Formulário ── */
-.login-form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.form-group label {
-  font-size: 13px;
-  font-weight: 600;
-  color: #1a1a2e;
-}
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label { font-size: 13px; font-weight: 600; color: var(--text-primary); }
 
 .form-group input {
   padding: 11px 14px;
-  border: 1.5px solid #e5e7eb;
+  border: 1.5px solid var(--border-color);
   border-radius: 8px;
   font-size: 14px;
-  color: #1a1a2e;
+  color: var(--text-primary);
+  background: var(--bg-input);
   outline: none;
   transition: border-color 0.2s;
   width: 100%;
 }
 
-.form-group input:focus {
-  border-color: #4ade80;
-}
+.form-group input:focus { border-color: #4ade80; }
 
-.input-password {
-  position: relative;
-}
-
-.input-password input {
-  padding-right: 44px;
-}
+.input-password { position: relative; }
+.input-password input { padding-right: 44px; }
 
 .toggle-password {
   position: absolute;
@@ -149,17 +104,17 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: #aaa;
+  color: var(--text-muted);
   display: flex;
   align-items: center;
   padding: 0;
 }
 
-.toggle-password:hover { color: #555; }
+.toggle-password:hover { color: var(--text-primary); }
 
 .login-error {
-  background-color: #fef2f2;
-  border: 1px solid #fecaca;
+  background-color: #fef2f222;
+  border: 1px solid #fecaca44;
   color: #ef4444;
   padding: 10px 14px;
   border-radius: 8px;
@@ -177,15 +132,11 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #555;
+  color: var(--text-secondary);
   cursor: pointer;
 }
 
-.forgot-link {
-  color: #4ade80;
-  font-weight: 500;
-}
-
+.forgot-link { color: #4ade80; font-weight: 500; cursor: pointer; }
 .forgot-link:hover { text-decoration: underline; }
 
 .btn-login {
@@ -202,16 +153,8 @@
 
 .btn-login:hover  { background-color: #22c55e; }
 .btn-login:active { transform: scale(0.98); }
+.btn-login:disabled { opacity: 0.7; cursor: not-allowed; }
 
-.signup-text {
-  text-align: center;
-  font-size: 13px;
-  color: #888;
-}
-
-.signup-text a {
-  color: #4ade80;
-  font-weight: 600;
-}
-
+.signup-text { text-align: center; font-size: 13px; color: var(--text-secondary); }
+.signup-text a { color: #4ade80; font-weight: 600; cursor: pointer; }
 .signup-text a:hover { text-decoration: underline; }

@@ -11,6 +11,7 @@ import {
 } from 'lucide-react'
 import Notificacoes from '../components/Notificacoes'
 import './MainLayout.css'
+import ThemeToggle from '../components/ThemeToggle'
 
 const navItems = [
   { to: '/',           icon: <LayoutDashboard size={20} />, label: 'Dashboard' },
@@ -70,6 +71,7 @@ export default function MainLayout() {
         <header className="topbar">
           <h1 className="page-title">Dashboard</h1>
           <div className="topbar-acoes">
+            <ThemeToggle />
             <Notificacoes />
             <div className="topbar-user">
               <div className="avatar">{iniciais}</div>

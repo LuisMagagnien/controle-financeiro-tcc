@@ -11,7 +11,7 @@
 }
 
 .card {
-  background: #fff;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 20px;
   display: flex;
@@ -29,7 +29,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #888;
+  color: var(--text-secondary);
 }
 
 .card-title { font-size: 13px; }
@@ -37,14 +37,14 @@
 .card-icon {
   padding: 6px;
   border-radius: 8px;
-  background: #f3f4f6;
+  background: var(--bg-muted);
   display: flex;
 }
 
 .card-value {
   font-size: 24px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--text-primary);
 }
 
 .card-trend {
@@ -65,7 +65,7 @@
 }
 
 .grafico-card {
-  background: #fff;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 24px;
   display: flex;
@@ -82,19 +82,16 @@
 .grafico-header h3 {
   font-size: 15px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--text-primary);
 }
 
-.grafico-header span {
-  font-size: 12px;
-  color: #aaa;
-}
+.grafico-header span { font-size: 12px; color: var(--text-muted); }
 
 .grafico-legenda {
   display: flex;
   gap: 20px;
   font-size: 13px;
-  color: #555;
+  color: var(--text-secondary);
 }
 
 .grafico-legenda span {
@@ -114,30 +111,30 @@
 .dot.red   { background: #f87171; }
 
 .tooltip-custom {
-  background: #fff;
-  border: 1px solid #e5e7eb;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 10px 14px;
   font-size: 13px;
-  color: #1a1a2e;
-  box-shadow: 0 4px 12px #0000000f;
+  color: var(--text-primary);
+  box-shadow: var(--shadow);
 }
 
 .tooltip-label {
   font-weight: 600;
   margin-bottom: 4px;
-  color: #1a1a2e;
+  color: var(--text-primary);
 }
 
 /* ── Tabela ── */
 .section-title {
   font-size: 16px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--text-primary);
 }
 
 .transacoes-table {
-  background: #fff;
+  background: var(--bg-card);
   border-radius: 12px;
   overflow: hidden;
 }
@@ -146,10 +143,10 @@
   display: grid;
   grid-template-columns: 2fr 1.5fr 1fr 1fr;
   padding: 12px 20px;
-  background: #f9fafb;
+  background: var(--bg-muted);
   font-size: 12px;
   font-weight: 600;
-  color: #888;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -158,17 +155,17 @@
   display: grid;
   grid-template-columns: 2fr 1.5fr 1fr 1fr;
   padding: 14px 20px;
-  border-top: 1px solid #f0f2f5;
+  border-top: 1px solid var(--border-muted);
   font-size: 14px;
   align-items: center;
   transition: background 0.15s;
 }
 
-.table-row:hover { background: #f9fafb; }
+.table-row:hover { background: var(--bg-hover); }
 
-.t-desc  { font-weight: 500; color: #1a1a2e; }
-.t-cat   { color: #888; }
-.t-data  { color: #aaa; }
+.t-desc  { font-weight: 500; color: var(--text-primary); }
+.t-cat   { color: var(--text-secondary); }
+.t-data  { color: var(--text-muted); }
 
 .t-valor         { font-weight: 600; }
 .t-valor.receita { color: #22c55e; }

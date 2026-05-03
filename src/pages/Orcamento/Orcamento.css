@@ -7,11 +7,11 @@
 .orcamento-header h2 {
   font-size: 22px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--text-primary);
   margin-bottom: 6px;
 }
 
-.orcamento-header p { font-size: 14px; color: #888; }
+.orcamento-header p { font-size: 14px; color: var(--text-secondary); }
 
 .orcamento-acoes { display: flex; justify-content: flex-end; }
 
@@ -19,8 +19,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #4ade80;
-  color: #1a1a2e;
+  background: var(--accent);
+  color: var(--accent-text);
   font-weight: 700;
   font-size: 14px;
   padding: 10px 20px;
@@ -30,10 +30,10 @@
   transition: background 0.2s;
 }
 
-.btn-novo-orc:hover { background: #22c55e; }
+.btn-novo-orc:hover { background: var(--accent-hover); }
 
 .orcamento-vazio {
-  background: #fff;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 60px 20px;
   text-align: center;
@@ -43,12 +43,12 @@
   gap: 8px;
 }
 
-.orcamento-vazio p { font-size: 16px; font-weight: 600; color: #1a1a2e; }
-.orcamento-vazio span { font-size: 14px; color: #888; margin-bottom: 8px; }
+.orcamento-vazio p { font-size: 16px; font-weight: 600; color: var(--text-primary); }
+.orcamento-vazio span { font-size: 14px; color: var(--text-secondary); margin-bottom: 8px; }
 
 .orcamento-vazio button {
-  background: #4ade80;
-  color: #1a1a2e;
+  background: var(--accent);
+  color: var(--accent-text);
   font-weight: 700;
   padding: 10px 24px;
   border: none;
@@ -64,26 +64,21 @@
 }
 
 .orc-card {
-  background: #fff;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  border-top: 4px solid #e5e7eb;
+  border-top: 4px solid var(--border-color);
 }
 
 .orc-card.ok      { border-top-color: #22c55e; }
 .orc-card.aviso   { border-top-color: #f59e0b; }
 .orc-card.critico { border-top-color: #ef4444; }
 
-.orc-card-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-}
-
-.orc-info h3 { font-size: 15px; font-weight: 600; color: #1a1a2e; margin-bottom: 4px; }
+.orc-card-header { display: flex; align-items: flex-start; justify-content: space-between; }
+.orc-info h3 { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
 
 .orc-badge {
   font-size: 11px;
@@ -92,67 +87,46 @@
   border-radius: 20px;
 }
 
-.orc-badge.ok      { background: #f0fdf4; color: #22c55e; }
-.orc-badge.aviso   { background: #fffbeb; color: #f59e0b; }
-.orc-badge.critico { background: #fef2f2; color: #ef4444; }
+.orc-badge.ok      { background: #f0fdf422; color: #22c55e; }
+.orc-badge.aviso   { background: #fffbeb22; color: #f59e0b; }
+.orc-badge.critico { background: #fef2f222; color: #ef4444; }
 
 .btn-remover-orc {
   background: none;
   border: none;
   cursor: pointer;
-  color: #ddd;
+  color: var(--border-color);
   display: flex;
   padding: 4px;
   border-radius: 6px;
   transition: all 0.2s;
 }
 
-.btn-remover-orc:hover { color: #ef4444; background: #fef2f2; }
+.btn-remover-orc:hover { color: #ef4444; background: #fef2f222; }
 
-.orc-valores {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-}
+.orc-valores { display: flex; align-items: baseline; gap: 8px; }
+.orc-gasto { font-size: 22px; font-weight: 700; color: var(--text-primary); }
+.orc-limite { font-size: 13px; color: var(--text-muted); }
 
-.orc-gasto { font-size: 22px; font-weight: 700; color: #1a1a2e; }
-.orc-limite { font-size: 13px; color: #aaa; }
+.orc-barra-bg { height: 8px; background: var(--bg-muted); border-radius: 99px; overflow: hidden; }
 
-.orc-barra-bg {
-  height: 8px;
-  background: #f0f2f5;
-  border-radius: 99px;
-  overflow: hidden;
-}
-
-.orc-barra {
-  height: 100%;
-  border-radius: 99px;
-  transition: width 0.4s;
-}
-
+.orc-barra { height: 100%; border-radius: 99px; transition: width 0.4s; }
 .orc-barra.ok      { background: #22c55e; }
 .orc-barra.aviso   { background: #f59e0b; }
 .orc-barra.critico { background: #ef4444; }
 
-.orc-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 12px;
-}
+.orc-footer { display: flex; align-items: center; justify-content: space-between; font-size: 12px; }
 
 .orc-pct { font-weight: 700; }
 .orc-pct.ok      { color: #22c55e; }
 .orc-pct.aviso   { color: #f59e0b; }
 .orc-pct.critico { color: #ef4444; }
-.orc-restante { color: #aaa; }
+.orc-restante { color: var(--text-muted); }
 
-/* ── Modal ── */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: #00000055;
+  background: #00000066;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -160,7 +134,7 @@
 }
 
 .modal {
-  background: #fff;
+  background: var(--bg-card);
   border-radius: 16px;
   padding: 32px;
   width: 100%;
@@ -170,47 +144,36 @@
   gap: 20px;
 }
 
-.modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+.modal-header { display: flex; align-items: center; justify-content: space-between; }
+.modal-header h3 { font-size: 18px; font-weight: 700; color: var(--text-primary); }
 
-.modal-header h3 { font-size: 18px; font-weight: 700; color: #1a1a2e; }
-
-.modal-fechar {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #aaa;
-  display: flex;
-}
-
-.modal-fechar:hover { color: #555; }
+.modal-fechar { background: none; border: none; cursor: pointer; color: var(--text-muted); display: flex; }
+.modal-fechar:hover { color: var(--text-primary); }
 
 .modal-form { display: flex; flex-direction: column; gap: 16px; }
 
 .form-group { display: flex; flex-direction: column; gap: 6px; }
-.form-group label { font-size: 13px; font-weight: 600; color: #1a1a2e; }
+.form-group label { font-size: 13px; font-weight: 600; color: var(--text-primary); }
 
 .form-group input,
 .form-group select {
   padding: 10px 14px;
-  border: 1.5px solid #e5e7eb;
+  border: 1.5px solid var(--border-color);
   border-radius: 8px;
   font-size: 14px;
-  color: #1a1a2e;
+  color: var(--text-primary);
+  background: var(--bg-input);
   outline: none;
   transition: border-color 0.2s;
   width: 100%;
 }
 
 .form-group input:focus,
-.form-group select:focus { border-color: #4ade80; }
+.form-group select:focus { border-color: var(--accent); }
 
 .form-erro {
-  background: #fef2f2;
-  border: 1px solid #fecaca;
+  background: #fef2f222;
+  border: 1px solid #fecaca44;
   color: #ef4444;
   padding: 10px 14px;
   border-radius: 8px;
@@ -218,8 +181,8 @@
 }
 
 .btn-salvar {
-  background: #4ade80;
-  color: #1a1a2e;
+  background: var(--accent);
+  color: var(--accent-text);
   font-size: 15px;
   font-weight: 700;
   padding: 13px;

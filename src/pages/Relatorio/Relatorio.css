@@ -8,13 +8,12 @@
 .relatorio-header h2 {
   font-size: 22px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--text-primary);
   margin-bottom: 6px;
 }
 
-.relatorio-header p { font-size: 14px; color: #888; }
+.relatorio-header p { font-size: 14px; color: var(--text-secondary); }
 
-/* ── Cards ── */
 .relatorio-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -22,7 +21,7 @@
 }
 
 .rel-card {
-  background: #fff;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 20px;
   display: flex;
@@ -32,17 +31,16 @@
 }
 
 .rel-card div { display: flex; flex-direction: column; gap: 4px; }
-.rel-card span { font-size: 12px; color: #888; }
-.rel-card strong { font-size: 18px; font-weight: 700; color: #1a1a2e; }
+.rel-card span { font-size: 12px; color: var(--text-secondary); }
+.rel-card strong { font-size: 18px; font-weight: 700; color: var(--text-primary); }
 
 .rel-card.blue   { border-left-color: #3b82f6; color: #3b82f6; }
 .rel-card.green  { border-left-color: #22c55e; color: #22c55e; }
 .rel-card.red    { border-left-color: #ef4444; color: #ef4444; }
 .rel-card.purple { border-left-color: #a855f7; color: #a855f7; }
 
-/* ── Seção ── */
 .relatorio-secao {
-  background: #fff;
+  background: var(--bg-card);
   border-radius: 12px;
   overflow: hidden;
 }
@@ -54,42 +52,37 @@
   padding: 20px 24px 16px;
 }
 
-.secao-header h3 {
-  font-size: 15px;
-  font-weight: 600;
-  color: #1a1a2e;
-}
+.secao-header h3 { font-size: 15px; font-weight: 600; color: var(--text-primary); }
 
 .filtro-tipo { display: flex; gap: 8px; }
 
 .filtro-btn {
   padding: 6px 14px;
   border-radius: 6px;
-  border: 1.5px solid #e5e7eb;
-  background: #fff;
+  border: 1.5px solid var(--border-color);
+  background: var(--bg-card);
   font-size: 13px;
   cursor: pointer;
-  color: #888;
+  color: var(--text-secondary);
   transition: all 0.2s;
 }
 
 .filtro-btn.ativo {
-  background: #1a1a2e;
-  color: #fff;
-  border-color: #1a1a2e;
+  background: var(--text-primary);
+  color: var(--bg-card);
+  border-color: var(--text-primary);
 }
 
-/* ── Tabela ── */
 .rel-tabela { display: flex; flex-direction: column; }
 
 .rel-tabela-header {
   display: grid;
   grid-template-columns: 2fr 1.5fr 1fr 1fr;
   padding: 10px 24px;
-  background: #f9fafb;
+  background: var(--bg-muted);
   font-size: 12px;
   font-weight: 600;
-  color: #888;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -98,34 +91,28 @@
   display: grid;
   grid-template-columns: 2fr 1.5fr 1fr 1fr;
   padding: 12px 24px;
-  border-top: 1px solid #f0f2f5;
+  border-top: 1px solid var(--border-muted);
   font-size: 14px;
   align-items: center;
   transition: background 0.15s;
 }
 
-.rel-tabela-row:hover { background: #f9fafb; }
+.rel-tabela-row:hover { background: var(--bg-hover); }
 
 .t-desc {
   display: flex;
   align-items: center;
   gap: 8px;
   font-weight: 500;
-  color: #1a1a2e;
+  color: var(--text-primary);
 }
 
-.tipo-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
+.tipo-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 .tipo-dot.receita { background: #22c55e; }
 .tipo-dot.despesa { background: #ef4444; }
 
-.t-cat  { color: #888; }
-.t-data { color: #aaa; }
+.t-cat  { color: var(--text-secondary); }
+.t-data { color: var(--text-muted); }
 
 .t-valor          { font-weight: 600; }
 .t-valor.receita  { color: #22c55e; }
@@ -134,18 +121,17 @@
 .rel-vazio {
   padding: 40px;
   text-align: center;
-  color: #aaa;
+  color: var(--text-muted);
   font-size: 14px;
 }
 
-/* ── Botão PDF ── */
 .btn-pdf {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: #1a1a2e;
-  color: #4ade80;
+  background: var(--text-primary);
+  color: var(--accent);
   font-size: 15px;
   font-weight: 700;
   padding: 16px;

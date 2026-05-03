@@ -1,0 +1,26 @@
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border-color);
+  background: var(--bg-card);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  color: var(--text-secondary);
+}
+
+.theme-toggle:hover {
+  background: var(--bg-muted);
+  color: var(--text-primary);
+}
+
+.theme-toggle.dark {
+  color: #facc15;
+}
+
+.theme-toggle.light {
+  color: #6366f1;
+}
