@@ -1,0 +1,119 @@
+.historico-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 720px;
+}
+
+.historico-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.historico-header p { font-size: 14px; color: var(--text-secondary); }
+
+.historico-filtros {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filtro-btn {
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border-color);
+  background: var(--bg-card);
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+}
+
+.filtro-btn.ativo {
+  background: var(--text-primary);
+  color: var(--bg-card);
+  border-color: var(--text-primary);
+}
+
+.historico-vazio {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 60px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.historico-vazio p    { font-size: 16px; font-weight: 600; color: var(--text-primary); }
+.historico-vazio span { font-size: 14px; color: var(--text-secondary); }
+
+.historico-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--bg-card);
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 8px 0;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 24px;
+  position: relative;
+  transition: background 0.15s;
+}
+
+.timeline-item:hover { background: var(--bg-hover); }
+
+.timeline-icone {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.timeline-icone.verde    { background: #f0fdf4; color: #22c55e; }
+.timeline-icone.vermelho { background: #fef2f2; color: #ef4444; }
+.timeline-icone.azul     { background: #eff6ff; color: #3b82f6; }
+.timeline-icone.roxo     { background: #faf5ff; color: #a855f7; }
+.timeline-icone.laranja  { background: #fff7ed; color: #f97316; }
+.timeline-icone.cinza    { background: var(--bg-muted); color: var(--text-muted); }
+
+[data-theme="dark"] .timeline-icone.verde    { background: #052e16; color: #22c55e; }
+[data-theme="dark"] .timeline-icone.vermelho { background: #2d0a0a; color: #ef4444; }
+[data-theme="dark"] .timeline-icone.azul     { background: #0c1a2e; color: #3b82f6; }
+[data-theme="dark"] .timeline-icone.roxo     { background: #1a0a2e; color: #a855f7; }
+[data-theme="dark"] .timeline-icone.laranja  { background: #2d1a00; color: #f97316; }
+
+.timeline-conteudo {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.timeline-descricao {
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.timeline-data {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.timeline-linha { display: none; }

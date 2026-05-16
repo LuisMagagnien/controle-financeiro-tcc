@@ -1,14 +1,7 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import {
-  LayoutDashboard,
-  ArrowDownUp,
-  Target,
-  Wallet,
-  Upload,
-  FileText,
-  PieChart,
-  Users,
-  LogOut
+  LayoutDashboard, ArrowDownUp, Target, Wallet,
+  Upload, FileText, PieChart, Users, History, LogOut
 } from 'lucide-react'
 import Notificacoes from '../components/Notificacoes'
 import ThemeToggle from '../components/ThemeToggle'
@@ -21,6 +14,7 @@ const navItems = [
   { to: '/carteiras',  icon: <Wallet size={20} />,          label: 'Carteiras' },
   { to: '/orcamento',  icon: <PieChart size={20} />,        label: 'Orçamento' },
   { to: '/familia',    icon: <Users size={20} />,           label: 'Família' },
+  { to: '/historico',  icon: <History size={20} />,         label: 'Histórico' },
   { to: '/importar',   icon: <Upload size={20} />,          label: 'Importar' },
   { to: '/relatorio',  icon: <FileText size={20} />,        label: 'Relatório' },
 ]
