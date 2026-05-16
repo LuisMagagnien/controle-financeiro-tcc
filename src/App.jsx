@@ -9,6 +9,7 @@ import Carteiras from './pages/Carteiras'
 import Importar from './pages/Importar'
 import Relatorio from './pages/Relatorio'
 import Orcamento from './pages/Orcamento'
+import Familia from './pages/Familia'
 import RecuperarSenha from './pages/RecuperarSenha'
 import RedefinirSenha from './pages/RedefinirSenha'
 import RotaProtegida from './components/RotaProtegida'
@@ -31,6 +32,7 @@ export default function App() {
           <Route path="metas"      element={<Metas />} />
           <Route path="carteiras"  element={<Carteiras />} />
           <Route path="orcamento"  element={<Orcamento />} />
+          <Route path="familia"    element={<Familia />} />
           <Route path="importar"   element={<Importar />} />
           <Route path="relatorio"  element={<Relatorio />} />
         </Route>

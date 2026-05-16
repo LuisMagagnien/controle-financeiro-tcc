@@ -7,11 +7,12 @@ import {
   Upload,
   FileText,
   PieChart,
+  Users,
   LogOut
 } from 'lucide-react'
 import Notificacoes from '../components/Notificacoes'
-import './MainLayout.css'
 import ThemeToggle from '../components/ThemeToggle'
+import './MainLayout.css'
 
 const navItems = [
   { to: '/',           icon: <LayoutDashboard size={20} />, label: 'Dashboard' },
@@ -19,6 +20,7 @@ const navItems = [
   { to: '/metas',      icon: <Target size={20} />,          label: 'Metas' },
   { to: '/carteiras',  icon: <Wallet size={20} />,          label: 'Carteiras' },
   { to: '/orcamento',  icon: <PieChart size={20} />,        label: 'Orçamento' },
+  { to: '/familia',    icon: <Users size={20} />,           label: 'Família' },
   { to: '/importar',   icon: <Upload size={20} />,          label: 'Importar' },
   { to: '/relatorio',  icon: <FileText size={20} />,        label: 'Relatório' },
 ]
