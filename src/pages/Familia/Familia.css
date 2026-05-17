@@ -497,3 +497,27 @@
 
 .btn-salvar:hover { opacity: 0.85; }
 .btn-salvar:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.membro-dados {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-remover-membro {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: flex;
+  padding: 4px;
+  border-radius: 6px;
+  transition: all 0.2s;
+  margin-left: auto;
+}
+
+.btn-remover-membro:hover {
+  color: #ef4444;
+  background: #fef2f222;
+}

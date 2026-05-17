@@ -251,8 +251,42 @@ async function removerCarteira(req, res) {
   }
 }
 
+async function removerMembro(req, res) {
+  try {
+    const { usuarioId } = req.params
+
+    const usuarioLogado = await prisma.usuario.findUnique({
+      where: { id: req.usuarioId },
+      include: { conta: { include: { usuarios: true } } }
+    })
+
+    if (!usuarioLogado.conta)
+      return res.status(400).json({ erro: 'Você não faz parte de uma conta compartilhada.' })
+
+    const membroParaRemover = usuarioLogado.conta.usuarios.find(
+      u => u.id === parseInt(usuarioId)
+    )
+
+    if (!membroParaRemover)
+      return res.status(404).json({ erro: 'Membro não encontrado.' })
+
+    if (membroParaRemover.id === req.usuarioId)
+      return res.status(400).json({ erro: 'Use "Sair da conta" para se remover.' })
+
+    await prisma.usuario.update({
+      where: { id: parseInt(usuarioId) },
+      data: { contaId: null }
+    })
+
+    res.json({ mensagem: 'Membro removido com sucesso.' })
+  } catch (err) {
+    res.status(500).json({ erro: 'Erro ao remover membro.' })
+  }
+}
+
 module.exports = {
   criarConta, entrarConta, sairConta, buscarConta,
+  removerMembro,
   listarTransacoes, adicionarTransacao, removerTransacao,
   listarMetas, adicionarMeta, atualizarMeta, removerMeta,
   listarCarteiras, adicionarCarteira, removerCarteira,

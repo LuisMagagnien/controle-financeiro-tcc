@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Users, Plus, LogOut, Copy, Check, TrendingUp, TrendingDown, Target, Wallet, X } from 'lucide-react'
+import { Users, Plus, LogOut, Copy, Check, TrendingUp, TrendingDown, Target, Wallet, X, UserMinus } from 'lucide-react'
 import { api } from '../../services/api'
 import './Familia.css'
 
@@ -77,6 +77,19 @@ export default function Familia() {
       setTransacoes([])
       setMetas([])
       setCarteiras([])
+    } catch (err) {
+      setErro(err.message)
+    }
+  }
+
+  async function handleRemoverMembro(membroId, membroNome) {
+    if (!confirm(`Tem certeza que deseja remover ${membroNome} da conta?`)) return
+    try {
+      await api.delete(`/familia/membros/${membroId}`)
+      setConta(prev => ({
+        ...prev,
+        usuarios: prev.usuarios.filter(u => u.id !== membroId)
+      }))
     } catch (err) {
       setErro(err.message)
     }
@@ -204,10 +217,19 @@ export default function Familia() {
                 <div className="membro-avatar">
                   {u.nome.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase()}
                 </div>
-                <div>
+                <div className="membro-dados">
                   <strong>{u.nome}</strong>
                   {u.id === usuario.id && <span className="membro-voce">você</span>}
                 </div>
+                {u.id !== usuario.id && (
+                  <button
+                    className="btn-remover-membro"
+                    onClick={() => handleRemoverMembro(u.id, u.nome)}
+                    title={`Remover ${u.nome}`}
+                  >
+                    <UserMinus size={15} />
+                  </button>
+                )}
               </div>
             ))}
           </div>
